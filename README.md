@@ -1,10 +1,8 @@
 # SurvivePG
 
-An action-RPG, where you automatically attack nearby mobs. It plays like a traditional proceedurally generated ARPG, with stats, gear & abilities. But the attacks are mostly auto.
+An action-RPG built with [godot-roc](https://github.com/scottc/godot-roc). Where you automatically attack nearby mobs. It plays like a traditional proceedurally generated ARPG, with stats, gear & abilities. But the attacks are mostly auto.
 
 ![SurvivePG Screenshot](brand/Screenshot_20261013_192229.png)
-
-Built with [godot-roc](https://).
 
 ## Build Requirements
 
@@ -14,6 +12,14 @@ Built with [godot-roc](https://).
 * `godot4.5` or newer; `redot26.2`, `godot4.7`, `godot4.5`, `rex0.0` etc.
 * `roc` [Install](https://roc-lang.org/install)
 * `linux-x86_64` & web `wasm32-emscripten` (Windows & MacOS support coming soon)
+
+## Downloads & Releases
+
+[Releases](https://github.com/scottc/survivepg/releases), coming soon.
+
+Online Web version, coming soon.
+
+For now, check out the functioning godot-roc [tech demo](https://scottc.github.io/godot-roc/).
 
 ## Build & Run
 
@@ -58,15 +64,15 @@ roc build main.roc --target=x64musl --output=my_game.so
 blueprint shell publish-to-web-env
 
 # [Web] Build
-roc build main.roc --target=wasm32 --output=my_game.wasm
+roc build main.roc --target=wasm32 --output=my_game.a
+
+# emcc from the emscripten toolchain...
+# Convert `my_game.a` (archive `wasm32-standalone.o`) to `my_game.wasm` (`wasm32-emscripten` SIDE_MODULE=2)
+emcc ...
 
 # Web publish (requires Godot web export templates to be installed.)
 # /home/{user}/.local/share/godot/export_templates/4.5.1.stable/web_dlink_nothreads_release.zip
 godot4.5 --export-release Web export/
-
-# emcc from the emscripten toolchain...
-# Convert `wasm32-standalone` to `wasm32-emscripten` SIDE_MODULE=2
-emcc ...
 
 # Web serve
 SERVE_PATH=export/ roc scripts/serve.roc
