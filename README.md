@@ -1,8 +1,15 @@
-# Survive PG
+# SurvivePG
 
 An action-RPG, where you automatically attack nearby mobs. It plays like a traditional proceedurally generated ARPG, with stats, gear & abilities. But the attacks are mostly auto.
 
-## Install Requirements
+![SurvivePG Screenshot](brand/Screenshot_20260923_194128.png)
+
+Built with [godot-roc](https://).
+
+## Build Requirements
+
+> [!TIP]
+> Learn about [Blueprint](https://github.com/lukewilliamboswell/roc-blueprint) & [Nix Flakes](https://nixos.wiki/wiki/Flakes).
 
 * `godot4.5` or newer; `redot26.2`, `godot4.7`, `godot4.5`, `rex0.0` etc.
 * `roc` [Install](https://roc-lang.org/install)
