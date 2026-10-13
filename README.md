@@ -2,7 +2,7 @@
 
 An action-RPG, where you automatically attack nearby mobs. It plays like a traditional proceedurally generated ARPG, with stats, gear & abilities. But the attacks are mostly auto.
 
-![SurvivePG Screenshot](brand/Screenshot_20260923_194128.png)
+![SurvivePG Screenshot](brand/Screenshot_20261013_192229.png)
 
 Built with [godot-roc](https://).
 
