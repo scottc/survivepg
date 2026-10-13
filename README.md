@@ -13,7 +13,7 @@ Built with [godot-roc](https://).
 
 * `godot4.5` or newer; `redot26.2`, `godot4.7`, `godot4.5`, `rex0.0` etc.
 * `roc` [Install](https://roc-lang.org/install)
-* `linux-x86_64` & web `wasm32-emscripten` only (Windows, MacOS & Web support coming soon)
+* `linux-x86_64` & web `wasm32-emscripten` (Windows & MacOS support coming soon)
 
 ## Build & Run
 
@@ -64,6 +64,7 @@ roc build main.roc --target=wasm32 --output=my_game.wasm
 # /home/{user}/.local/share/godot/export_templates/4.5.1.stable/web_dlink_nothreads_release.zip
 godot4.5 --export-release Web export/
 
+# emcc from the emscripten toolchain...
 # Convert `wasm32-standalone` to `wasm32-emscripten` SIDE_MODULE=2
 emcc ...
 
