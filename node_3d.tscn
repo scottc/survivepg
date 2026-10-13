@@ -1,0 +1,42 @@
+[gd_scene load_steps=7 format=3 uid="uid://cys3u2rbf68b"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_4xowi"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_a202f"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_noarx"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_a0tk4"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_r3fl7"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jka67"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="MyPlayerCharacter" type="MyPlayerCharacter" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.055913, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MyPlayerCharacter"]
+mesh = SubResource("CapsuleMesh_4xowi")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MyPlayerCharacter"]
+shape = SubResource("CapsuleShape3D_a202f")
+
+[node name="Npc" type="Npc" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1341182, -3.2264419)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Npc"]
+mesh = SubResource("CapsuleMesh_noarx")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Npc"]
+shape = SubResource("CapsuleShape3D_a0tk4")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 0, -50, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+mesh = SubResource("BoxMesh_r3fl7")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_jka67")

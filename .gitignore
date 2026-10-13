@@ -1,0 +1,5 @@
+.godot/
+.blueprint/
+
+my_game.so
+my_game.wasm

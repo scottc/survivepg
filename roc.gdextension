@@ -1,0 +1,14 @@
+[configuration]
+entry_symbol = "godot_roc_init"
+compatibility_minimum = "4.5"
+reloadable = true
+
+[libraries]
+linux.debug.x86_64   = "res://my_game.so"
+linux.release.x86_64 = "res://my_game.so"
+macos.debug          = "res://my_game.dylib"
+macos.release        = "res://my_game.dylib"
+windows.debug.x86_64 = "res://my_game.dll"
+windows.release.x86_64 = "res://my_game.dll"
+web.debug.wasm32 = "res://my_game.wasm"
+web.release.wasm32 = "res://my_game.wasm"
