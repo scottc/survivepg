@@ -1,12 +1,9 @@
 app [ready!, process!, scene_init!, physics_process!] {
-    pf: platform "https://github.com/scottc/godot-roc/releases/download/nightly-2026-10-13-dbbdb0c/godot4_5-platform-6UXQBeGpB9zY5Kytgpyavpc9ioLdWNBtQaF2orvqZGA5.tar.zst",
-    # pf: platform "https://github.com/scottc/godot-roc/releases/download/nightly-2026-10-13-dbbdb0c/godot-platform-HaTJuo3owLNqLWVir5f4FxuXRZtL5H8n2WaMKd3JmFpF.tar.zst",
-    # pf: platform "https://github.com/scottc/godot-roc/releases/download/nightly-2026-10-13-dbbdb0c/redot-platform-FtpVoMidux9ARFHpmdRM2oJEYepKPGnkYbnthHAcSDXo.tar.zst",
+    pf: platform "https://github.com/scottc/godot-roc/releases/download/nightly-2026-10-14-1021372/godot4_5-platform-EkiCjHcuhuFp5epWwhTnatcoq8SjNXdzcLR4S2b1JZQ3.tar.zst",
 }
 
 # Top level multi-engine & multi-version platform
 import pf.Engine
-import pf.Target
 import pf.GodotRoc
 import pf.Host
 
@@ -16,6 +13,7 @@ import pf.UtilityFunctions
 import pf.Vector3
 import pf.Vector3Methods
 import pf.InputSingleton
+import pf.EngineDebuggerSingleton
 
 # This app..
 import MyPlayerCharacter
@@ -34,6 +32,11 @@ scene_init! = || {
     #Engine.print_warning!("engine_runtime_ok! = ${Engine.engine_runtime_ok!().to_str()}")
     #Engine.print_warning!("[smoke] current_engine! = ${Str.inspect(Engine.current_engine!())}")
     #Engine.print_warning!("[smoke] current_target! = ${Str.inspect(Engine.current_target!())}")
+
+    # Roc API exists
+    # but we want to trigger host stub not-implementated error...
+    # just as a test...
+    EngineDebuggerSingleton.script_debug!(0, 0, 0)
 
     player_class_id = Engine.register_class!("MyPlayerCharacter", "CharacterBody3D")
     Engine.print_warning!("Registered MyPlayerCharacter (id=${player_class_id.to_str()})")
