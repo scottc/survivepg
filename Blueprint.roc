@@ -5,7 +5,8 @@ config = [
     Overlay("roc", "github:roc-lang/roc-overlay"),
     Environment("dev", [
         Overlays(["roc"]),
-        Command("roc", "rocpkgs.nightly-2026-09-27-a3ce7f1"),
+        # Versions: https://github.com/roc-lang/roc-overlay/blob/master/sources.json
+        Command("roc", "rocpkgs.nightly-2026-10-12-2664a27"),
         Tools([
             "godot",
             "godotPackages_4_5.godot",
