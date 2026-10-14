@@ -1,9 +1,6 @@
 app [ready!, process!, scene_init!, physics_process!] {
-    # [baseline] godot4.5 (baseline)
     pf: platform "https://github.com/scottc/godot-roc/releases/download/nightly-2026-10-13-dbbdb0c/godot4_5-platform-6UXQBeGpB9zY5Kytgpyavpc9ioLdWNBtQaF2orvqZGA5.tar.zst",
-    # godot (latest)
     # pf: platform "https://github.com/scottc/godot-roc/releases/download/nightly-2026-10-13-dbbdb0c/godot-platform-HaTJuo3owLNqLWVir5f4FxuXRZtL5H8n2WaMKd3JmFpF.tar.zst",
-    # redot (latest)
     # pf: platform "https://github.com/scottc/godot-roc/releases/download/nightly-2026-10-13-dbbdb0c/redot-platform-FtpVoMidux9ARFHpmdRM2oJEYepKPGnkYbnthHAcSDXo.tar.zst",
 }
 
@@ -31,12 +28,18 @@ import Npc
 scene_init! : () => {}
 scene_init! = || {
     Engine.print_warning!("Hello World!")
+    Engine.print_warning!("Staticlly linked info:")
+    #Engine.print_warning!("EngineInfo=${EngineInfo.version_full_name}")
+    Engine.print_warning!("Dynamiclly linked info:")
+    #Engine.print_warning!("engine_runtime_ok! = ${Engine.engine_runtime_ok!().to_str()}")
+    #Engine.print_warning!("[smoke] current_engine! = ${Str.inspect(Engine.current_engine!())}")
+    #Engine.print_warning!("[smoke] current_target! = ${Str.inspect(Engine.current_target!())}")
 
     player_class_id = Engine.register_class!("MyPlayerCharacter", "CharacterBody3D")
-    Engine.print_warning!("Registered MyPlayerCharacter id= ${player_class_id.to_str()}")
+    Engine.print_warning!("Registered MyPlayerCharacter (id=${player_class_id.to_str()})")
 
     npc_class_id = Engine.register_class!("Npc", "CharacterBody3D")
-    Engine.print_warning!("Registered Npc id= ${npc_class_id.to_str()}")
+    Engine.print_warning!("Registered Npc (id=${npc_class_id.to_str()})")
 }
 
 physics_process! : GodotRoc.ClassId, F64 => {}
