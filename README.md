@@ -28,14 +28,17 @@ For now, check out the functioning godot-roc [tech demo](https://scottc.github.i
 # nix run github:lukewilliamboswell/roc-blueprint/0.5.0 -- shell
 blueprint shell
 
-# Run [baseline] godot
-godot4.5 project.godot
+# Run [baseline] godot4.3
+godot4.3 project.godot
 
 # Run redot
 #redot project.godot
 
-# Run godot
+# Run godot 4.7
 #godot project.godot
+
+# Run blazium
+#blazium project.godot
 
 # [Linux] Build
 roc build main.roc --target=x64musl --output=my_game.so
@@ -72,7 +75,7 @@ emcc ...
 
 # Web publish (requires Godot web export templates to be installed.)
 # /home/{user}/.local/share/godot/export_templates/4.5.1.stable/web_dlink_nothreads_release.zip
-godot4.5 --export-release Web export/
+godot4.3 --export-release Web export/
 
 # Web serve
 SERVE_PATH=export/ roc scripts/serve.roc

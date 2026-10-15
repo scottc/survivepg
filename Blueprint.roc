@@ -1,15 +1,20 @@
 app [config] { pf: platform "https://github.com/lukewilliamboswell/roc-blueprint/releases/download/0.5.0/CupqPH9snWf11g7tWgcJf4Yg5cJ3K9fhL7fSgqDcqJQH.tar.zst" }
 
 config = [
-    Name("foo"),
+    Name("SurvivePG"),
     Overlay("roc", "github:roc-lang/roc-overlay"),
+	Overlay("redot", "path:./flakes/redot-nix"),
+	#Overlay("rex", "path:./flakes/rex-nix"),
+	Overlay("blazium", "path:./flakes/blazium-nix"),
     Environment("dev", [
-        Overlays(["roc"]),
+        Overlays(["roc", "redot", "blazium"]),
         # Versions: https://github.com/roc-lang/roc-overlay/blob/master/sources.json
         Command("roc", "rocpkgs.nightly-2026-10-12-2664a27"),
         Tools([
             "godot",
-            "godotPackages_4_5.godot",
+            "godotPackages_4_3.godot",
+            "redot",
+            "blazium",
         ])
     ]),
     Shell("default", [Use("dev")]),
