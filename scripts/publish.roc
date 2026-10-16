@@ -1,76 +1,57 @@
 app [main!] {
-	pf: platform "https://github.com/scottc/roc-build/releases/download/v0.1.0-rc1/EG89xVCPEj7M71tj23bNmENBi3uHAbavsWQL9NuTV8vo.tar.zst",
+	pf: platform "https://github.com/scottc/roc-build/releases/download/v0.1.0-rc2/9cUPXghifH4XBG8rUCn5nLWmBjsxezzmchfPaFrb8CPe.tar.zst",
 }
 
+import pf.Mem
+import pf.Build
+import pf.BuildCmd
 import pf.Log
-import pf.Build exposing [Cmd, BuildGraph, TaskId]
 
 import modules/PublishModule exposing [PublishMatrixEntry]
 
 main! : List(Str) => Try(_, _)
 main! = |_args| {
 
-    graph = PublishModule.publish_matrix()
-    |> PublishHelper.to_run_graph
+    entries = PublishModule.publish_matrix() |> PublishHelper.to_run_graph
+    Log.info!(Str.inspect(entries))
 
+    graph = Build.graph_with(entries,
+        {
+            max_memory: Mem.gb(8),
+            max_parallel: 3,
+        },
+    )
     Log.info!(Str.inspect(graph))
-    Build.run!(graph)
 
+    Build.run!(graph)
 }
 
 PublishHelper := {}.{
-
-    ensure_dir = |id, dir| {
-        s : Str
-        s = dir
-
-        Build.cmd({
-            id: id,
-            depends_on: [], # clean?
-            program: "mkdir",
-            args: [],
-            description: "mkdir ...",
-            cwd: "",
-            env: [],
-            inputs: [],
-            outputs: [],
-        })
-    }
-
-    to_run_graph : List(PublishMatrixEntry) -> BuildGraph
+    to_run_graph : List(PublishMatrixEntry) -> List(BuildCmd)
     to_run_graph = |entries| {
-        $id : TaskId
-        var $id = 0
 
-        #$graph_entries : List(Task)
         var $graph_entries = []
 
+        # The build cmds...
         for entry in entries {
             match entry.cpu_arch_os {
                 Wasm32 => {
-                    roc_build = Build.cmd({
-                        id: $id,
-                        depends_on: [],
+
+                    roc_build = BuildCmd.new({
                         program: "roc",
                         args: [
                      			"build",
                      			"main.roc",
-                                "--optimize=speed",
+                                #"--optimize=speed",
                      			"--target=${entry.cpu_arch_os.to_str()}",
                      			"--output=roc-out/${entry.engine.to_str()}/my_game.wasm.a",
                         ],
-                        description: "roc build ${$id.to_str()} ${entry.engine.to_str()} ${entry.cpu_arch_os.to_str()}",
-                        cwd: "",
-                        env: [],
-                        inputs: [],
-                        outputs: [],
+                        description: "roc build ${entry.engine.to_str()} ${entry.cpu_arch_os.to_str()}",
                     })
+                    .with_memory(Mem.gb(1))
                     $graph_entries = $graph_entries.append(roc_build)
-                    $id  = $id + 1
 
-                    emcc = Build.cmd({
-                        id: $id,
-                        depends_on: [$id - 1],
+                    emcc = BuildCmd.new({
                         program: "emcc",
                         args: [
                             "roc-out/${entry.engine.to_str()}/my_game.wasm.a",
@@ -78,22 +59,17 @@ PublishHelper := {}.{
                             "emcc-out/${entry.engine.to_str()}/my_game.wasm",
                             "-sSIDE_MODULE=2",
                             "-sERROR_ON_UNDEFINED_SYMBOLS=0",
-                            "-sEXPORTED_FUNCTIONS='[\"_godot_roc_init\"]'",
+                            "-sEXPORTED_FUNCTIONS='[\"_gdextension_roc_init\"]'",
                             "-O0",
                             "-msimd128",
                         ],
-                        description: "emcc ${$id.to_str()} ${entry.engine.to_str()} ${entry.cpu_arch_os.to_str()}",
-                        cwd: "",
-                        env: [],
-                        inputs: [],
-                        outputs: [],
+                        description: "emcc ${entry.engine.to_str()} ${entry.cpu_arch_os.to_str()}",
                     })
+                    .depends_on([roc_build])
+                    .with_memory(Mem.gb(1))
                     $graph_entries = $graph_entries.append(emcc)
-                    $id  = $id + 1
 
-                    engine_export_web = Build.cmd({
-                        id: $id,
-                        depends_on: [$id - 1],
+                    engine_export_web = BuildCmd.new({
                         program: entry.engine.to_str(),
                         args: [
                  			"--headless",
@@ -101,14 +77,12 @@ PublishHelper := {}.{
                  			"Web",
                  			"export/${entry.engine.to_str()}/index.html"
                         ],
-                        description: "${entry.engine.to_str()} --export-release ${$id.to_str()} ${entry.cpu_arch_os.to_str()}",
-                        cwd: "",
-                        env: [],
-                        inputs: [],
-                        outputs: [],
+                        description: "${entry.engine.to_str()} --export-release ${entry.cpu_arch_os.to_str()}",
                     })
+                    .depends_on([emcc])
+                    .with_memory(Mem.gb(1))
                     $graph_entries = $graph_entries.append(engine_export_web)
-                    $id  = $id + 1
+
 
                     {}
                 }
@@ -119,6 +93,6 @@ PublishHelper := {}.{
             }
         }
 
-        Build.graph($graph_entries)
+        $graph_entries
     }
 }

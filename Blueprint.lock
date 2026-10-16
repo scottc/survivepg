@@ -142,15 +142,15 @@
 						(name "locked")
 						(value (Attrs ((
 							(name "lastModified")
-							(value (Int 1731533236))) (
+							(value (Int 1791914995))) (
 							(name "narHash")
-							(value (Str "sha256-l0KFg5HjrsfsO/JpG+r7fRrqm12kzFHyUHqHCVpMMbI="))) (
+							(value (Str "sha256-Zf/xfQEAasnwnmEfHqW/4hjDE/s44yn2hD4RuVIZRjA="))) (
 							(name "owner")
 							(value (Str "numtide"))) (
 							(name "repo")
 							(value (Str "flake-utils"))) (
 							(name "rev")
-							(value (Str "11707dc2f618dd54ca8739b309ec4fc024de578b"))) (
+							(value (Str "b7a79d3fea1e214f6d668d521cecec0c01e26544"))) (
 							(name "type")
 							(value (Str "github"))))))) (
 						(name "original")
@@ -218,15 +218,15 @@
 						(name "locked")
 						(value (Attrs ((
 							(name "lastModified")
-							(value (Int 1791594108))) (
+							(value (Int 1791956154))) (
 							(name "narHash")
-							(value (Str "sha256-XK4KceonkwD8LuMAt/vNrz982mXJM5jeHAxMwsUXXAQ="))) (
+							(value (Str "sha256-jBYGPi4udQ9uo4KQp9m2J0546nJVQitG15gvZSaVVAs="))) (
 							(name "owner")
 							(value (Str "NixOS"))) (
 							(name "repo")
 							(value (Str "nixpkgs"))) (
 							(name "rev")
-							(value (Str "6510408d147d8c5e6d76043e899e9251756f6a75"))) (
+							(value (Str "55bfb4d7437bd4e09ab7cba58a43bd68eb310044"))) (
 							(name "type")
 							(value (Str "github"))))))) (
 						(name "original")
@@ -282,9 +282,9 @@
 						(name "locked")
 						(value (Attrs ((
 							(name "lastModified")
-							(value (Int 1791815666))) (
+							(value (Int 1792169786))) (
 							(name "narHash")
-							(value (Str "sha256-KKCkKYE70RZWSAS6WhTKbFbudacK0iIauLxyQC32FgM="))) (
+							(value (Str "sha256-GvLwkeYbbQpzL/wq0bh5Mfz81W/np2t2GbzUVrIUCiA="))) (
 							(name "type")
 							(value (Str "path"))) (
 							(name "path")
@@ -412,7 +412,7 @@
 		(provider "nix")
 		(ref "github:roc-lang/roc-overlay")
 		(rev "8ecd94ac61036379778dca910bdaa6da6cd40bb8")) (
-		(digest "sha256:d77f92568655a439fe584109ef18fae6eafc2884087956e001765820ce0d8483")
+		(digest "sha256:13aa9a100bbde37d6d339eaa4f19ecc46b0ac700e73ae731df3817fb43a34c53")
 		(name "redot")
 		(provider "nix")
 		(ref "path:flakes/redot-nix")

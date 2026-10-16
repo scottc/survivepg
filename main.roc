@@ -1,11 +1,8 @@
 ## SurvivePG
 app [ready!, process!, scene_init!, physics_process!] {
-    # godot4.7
-    pf: platform "https://github.com/scottc/godot-roc/releases/download/nightly-2026-10-15-a0c681f/godot4_7-platform-CnihCYmnf85DpCER7ah8R4jLSHSSK2p6TTgWfH8dmAcL.tar.zst",
-    # redot26.2
-    # pf: platform "https://github.com/scottc/godot-roc/releases/download/nightly-2026-10-15-a0c681f/redot26_2-platform-6BYcLkzVMZiNL2aKhRFFBMstLdjU5CGYbiimzurpD9k7.tar.zst",
-    # blazium0.6
-    # pf: platform "https://github.com/scottc/godot-roc/releases/download/nightly-2026-10-15-a0c681f/blazium0_6-platform-8d1oUgcLnc1C3r7bxhtCPzDt6zAo1kRfPQnSeuViy7m5.tar.zst",
+    # pf: platform "https://github.com/scottc/gdextension-roc/releases/download/nightly-2026-10-16-6287554/godot4_7-8RoeH6xS1oKC676oUT65JcvGmk8SPX1ngKPm1u7YUTi6.tar.zst",
+    pf: platform "https://github.com/scottc/gdextension-roc/releases/download/nightly-2026-10-16-6287554/redot26_3-FoVDiUDwMfzgdBhKgDMNRp5JtETrkexF15NKxpxan2Mk.tar.zst",
+    # pf: platform "https://github.com/scottc/gdextension-roc/releases/download/nightly-2026-10-16-6287554/blazium0_6-C1hHwkrAcYrS3VPrwbAp9Xa3Q5WcFmQuoEAh9J4i3qxK.tar.zst",
 }
 
 # Top level multi-engine & multi-version platform
