@@ -1,6 +1,6 @@
 # SurvivePG
 
-An action-RPG built with [godot-roc](https://github.com/scottc/godot-roc). Where you automatically attack nearby mobs. It plays like a traditional proceedurally generated ARPG, with stats, gear & abilities. But the attacks are mostly auto like vampire survivors.
+An action-RPG built with [GDExtension-roc](https://github.com/scottc/gdextension-roc). Where you automatically attack nearby mobs. It plays like a traditional proceedurally generated ARPG, with stats, gear & abilities. But the attacks are mostly auto like vampire survivors.
 
 ![SurvivePG Screenshot](brand/Screenshot_20261013_192229.png)
 
