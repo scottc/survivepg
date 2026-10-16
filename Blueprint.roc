@@ -6,7 +6,19 @@ config = [
 	Overlay("redot", "path:./flakes/redot-nix"),
 	#Overlay("rex", "path:./flakes/rex-nix"),
 	Overlay("blazium", "path:./flakes/blazium-nix"),
+	Shell("default", [Use("dev")]),
     Environment("dev", [
+        Overlays(["roc", "redot", "blazium"]),
+        # Versions: https://github.com/roc-lang/roc-overlay/blob/master/sources.json
+        Command("roc", "rocpkgs.nightly-2026-10-12-2664a27"),
+        Tools([
+            "godot",
+            "godotPackages_4_3.godot",
+            "redot",
+            "blazium",
+        ])
+    ]),
+    Environment("publish-env", [
         Overlays(["roc", "redot", "blazium"]),
         # Versions: https://github.com/roc-lang/roc-overlay/blob/master/sources.json
         Command("roc", "rocpkgs.nightly-2026-10-12-2664a27"),
@@ -18,7 +30,10 @@ config = [
             "emscripten"
         ])
     ]),
-    Shell("default", [Use("dev")]),
+Task("export", [
+    Use("publish-env"),
+	Run(["roc", "run", "scripts/publish.roc"]),
+]),
 ]
 
 # config = [
