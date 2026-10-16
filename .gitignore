@@ -2,4 +2,7 @@
 .blueprint/
 
 my_game.so
+my_game.a
 my_game.wasm
+
+export/

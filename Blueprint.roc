@@ -15,6 +15,7 @@ config = [
             "godotPackages_4_3.godot",
             "redot",
             "blazium",
+            "emscripten"
         ])
     ]),
     Shell("default", [Use("dev")]),

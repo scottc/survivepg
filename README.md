@@ -64,18 +64,30 @@ roc build main.roc --target=x64musl --output=my_game.so
 ```sh
 # Enter reproducable publish to web environment:
 # nix run github:lukewilliamboswell/roc-blueprint/0.5.0 -- shell
-blueprint shell publish-to-web-env
+blueprint shell export-to-web-env
 
 # [Web] Build
 roc build main.roc --target=wasm32 --output=my_game.a
 
 # emcc from the emscripten toolchain...
 # Convert `my_game.a` (archive `wasm32-standalone.o`) to `my_game.wasm` (`wasm32-emscripten` SIDE_MODULE=2)
-emcc ...
+emcc my_game.a \
+-o my_game.wasm \
+-sSIDE_MODULE=2 \
+-sERROR_ON_UNDEFINED_SYMBOLS=0 \
+-sEXPORTED_FUNCTIONS='["_godot_roc_init"]' \
+-O0 \
+-msimd128
 
-# Web publish (requires Godot web export templates to be installed.)
-# /home/{user}/.local/share/godot/export_templates/4.5.1.stable/web_dlink_nothreads_release.zip
-godot4.3 --export-release Web export/
+# Web publish (requires Godot web export templates to be installed per engine ie.)
+# /home/[USER]/.local/share/[ENGINE]/export_templates/[ENGINE_VERSION]/web_dlink_nothreads_release.zip
+godot --headless --export-release Web export/
+redot --headless --export-release Web export/
+blazium --headless --export-release Web export/
+godot4.3 --headless --export-release Web export/
+
+# TODO: single command
+blueprint run export-to-web
 
 # Web serve
 SERVE_PATH=export/ roc scripts/serve.roc

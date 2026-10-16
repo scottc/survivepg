@@ -30,35 +30,36 @@ import Npc
 
 scene_init! : () => {}
 scene_init! = || {
-    Engine.print_warning!("Hello World!")
+Engine.print_warning!("Hello World!")
 
-    Engine.print_warning!("Static & Runtime info!")
+Engine.print_warning!("Static & Runtime info!")
 
-    # --baseline={engine}
-    Engine.print_warning!("--baseline=${EngineInfo.version_major.to_str()}.${EngineInfo.version_minor.to_str()}.${EngineInfo.version_patch.to_str()}")
+# --baseline={engine}
+Engine.print_warning!("--baseline=${EngineInfo.version_major.to_str()}.${EngineInfo.version_minor.to_str()}.${EngineInfo.version_patch.to_str()}")
 
-    # --engines={engine1,engine2}
-    _exclusive_engine_content = match Engine.current_engine!() {
-        Godot4_5(_gd_api) => "Exclusive godot4.5 content is avaliable."
-        Godot4_7(_gd_api) => "Exclusive godot4.7 content is avaliable."
-        Redot26_2(_rd_api) => "Exclusive redot26.2 content is avaliable."
-        Blazium0_6(_bz_api) => "Exclusive blazium0.6 content is avaliable."
-        # other => "You snooze you loose ${Str.inspect(other)}."
-    }
+# --engines={engine1,engine2,...}
+_exclusive_engine_content = match Engine.current_engine!() {
+    # TODO: rework these, roc can pattern match on "{ major: 4, minor: _ }"
+    Godot4_5(_gd_api) => "Exclusive godot4.5 content is avaliable."
+    Godot4_7(_gd_api) => "Exclusive godot4.7 content is avaliable."
+    Redot26_2(_rd_api) => "Exclusive redot26.2 content is avaliable."
+    Blazium0_6(_bz_api) => "Exclusive blazium0.6 content is avaliable."
+    other => "You snooze you loose ${Str.inspect(other)}."
+}
 
-    # --targets={target1,target2}
-    _exclusive_cpu_arch_os_content = match Engine.current_target!() {
-        Wasm32 => "Exclusive Web Content!"
-        X64musl => "Exclusive Native Linux Desktop Content!"
-    }
+# --targets={target1,target2,...}
+_exclusive_cpu_arch_os_content = match Engine.current_target!() {
+    Wasm32 => "Exclusive Web Content!"
+    X64musl => "Exclusive Native Linux Desktop Content!"
+}
 
-    # Does the dynamiclly linked runtime
-    # match one of the static --engines={engine1,engine2}?
-    _is_safe = match Engine.engine_runtime_ok!() {
-        0 => crash "Oh no, we're in the danger zone, we should just crash."
-        1 => "We've got the green light, everything is good to go!"
-        _ => crash "A GDExtension U8 Bool... Unexpected value! should be 1 or 0."
-    }
+# Does the dynamiclly linked runtime
+# match one of the static --engines={engine1,engine2,...}?
+_is_safe = match Engine.engine_runtime_ok!() {
+    0 => crash "Oh no, we're in the danger zone, we should just crash."
+    1 => "We've got the green light, everything is good to go!"
+    _ => crash "A GDExtension U8 Bool... Unexpected value! should be 1 or 0."
+}
 
     # Roc API exists
     # but we want to trigger host stub not-implementated error...
