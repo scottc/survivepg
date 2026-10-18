@@ -39,11 +39,11 @@ config = [
         # Versions: https://github.com/roc-lang/roc-overlay/blob/master/sources.json
         Command("roc", "rocpkgs.nightly-2026-10-15-38e6c42"),
         Tools([
-            "godot",
-            "godotPackages_4_3.godot",
-            "redot",
-            "blazium",
-            "emscripten"
+            # "godot",
+            # "godotPackages_4_3.godot",
+            # "redot",
+            # "blazium",
+            # "emscripten"
         ])
     ]),
     Task("ci", [
