@@ -46,7 +46,9 @@
 					(name "dev")
 					(value (List ((Str "roc") (Str "redot") (Str "blazium"))))) (
 					(name "publish-env")
-					(value (List ((Str "roc") (Str "redot") (Str "blazium"))))))))))))) (
+					(value (List ((Str "roc") (Str "redot") (Str "blazium"))))) (
+					(name "ci-env")
+					(value (List ((Str "roc"))))))))))))) (
 			(name "graph")
 			(value (Attrs ((
 				(name "root")
@@ -84,15 +86,15 @@
 						(name "locked")
 						(value (Attrs ((
 							(name "lastModified")
-							(value (Int 1791956154))) (
+							(value (Int 1792094642))) (
 							(name "narHash")
-							(value (Str "sha256-jBYGPi4udQ9uo4KQp9m2J0546nJVQitG15gvZSaVVAs="))) (
+							(value (Str "sha256-zp8ToDMnqZcu4o4IH9pdwXFXGp7yLm/M0dEnNWnyd7I="))) (
 							(name "owner")
 							(value (Str "NixOS"))) (
 							(name "repo")
 							(value (Str "nixpkgs"))) (
 							(name "rev")
-							(value (Str "55bfb4d7437bd4e09ab7cba58a43bd68eb310044"))) (
+							(value (Str "fe13242281a67641c0102cdb1087f0ebe586c7df"))) (
 							(name "type")
 							(value (Str "github"))))))) (
 						(name "original")
@@ -300,15 +302,15 @@
 						(name "locked")
 						(value (Attrs ((
 							(name "lastModified")
-							(value (Int 1792136425))) (
+							(value (Int 1792325940))) (
 							(name "narHash")
-							(value (Str "sha256-5XyjcQy4JIhOc7f5qFjcUQv6BzPl68Vlj4oNgASZdfc="))) (
+							(value (Str "sha256-agesoonFtza7R2ahJ4VaajnHRnhpaTa+kcYEdEOtahw="))) (
 							(name "owner")
 							(value (Str "roc-lang"))) (
 							(name "repo")
 							(value (Str "roc-overlay"))) (
 							(name "rev")
-							(value (Str "8ecd94ac61036379778dca910bdaa6da6cd40bb8"))) (
+							(value (Str "7147707be4ca5f2ed2a60127a06096c016ac9825"))) (
 							(name "type")
 							(value (Str "github"))))))) (
 						(name "original")
@@ -394,6 +396,8 @@
 			(name "roc")
 			(url "github:roc-lang/roc-overlay"))))
 		(overlays ((
+			(environment "ci-env")
+			(overlays ("roc"))) (
 			(environment "dev")
 			(overlays ("roc" "redot" "blazium"))) (
 			(environment "publish-env")
@@ -402,16 +406,16 @@
 			(name "default")
 			(provider Auto))))))
 	(sources ((
-		(digest "sha256:8c16063e2e2e750f6ea38290a7d9b6274e78ea7255422b46d7982f652695540b")
+		(digest "sha256:ce9f13a03327a9972ee28e081fda5dc171571a9ef22e6fccd1d1273569f277b2")
 		(name "default")
 		(provider "nix")
 		(ref "github:NixOS/nixpkgs/nixos-unstable")
-		(rev "55bfb4d7437bd4e09ab7cba58a43bd68eb310044")) (
-		(digest "sha256:e57ca3710cb824884e73b7f9a858dc510bfa0733e5ebc5658f8a0d80049975f7")
+		(rev "fe13242281a67641c0102cdb1087f0ebe586c7df")) (
+		(digest "sha256:6a07aca289c5b736bb4766a127855a6a39c74678696936be91c6047443ad6a1c")
 		(name "roc")
 		(provider "nix")
 		(ref "github:roc-lang/roc-overlay")
-		(rev "8ecd94ac61036379778dca910bdaa6da6cd40bb8")) (
+		(rev "7147707be4ca5f2ed2a60127a06096c016ac9825")) (
 		(digest "sha256:13aa9a100bbde37d6d339eaa4f19ecc46b0ac700e73ae731df3817fb43a34c53")
 		(name "redot")
 		(provider "nix")
