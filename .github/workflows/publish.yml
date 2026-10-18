@@ -1,0 +1,43 @@
+# .github/workflows/publish.yml
+name: Publish
+
+on:
+  #push:
+  #  branches: [master]
+  #pull_request:
+  workflow_dispatch:
+    #inputs:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  publish:
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: DeterminateSystems/nix-installer-action@main
+      # Free GitHub-backed Nix cache (no Cachix / $0)
+      #- uses: DeterminateSystems/magic-nix-cache-action@main
+      # Optional later (still $0): FlakeHub / cache.flakehub.com when the flake is published
+      # - uses: DeterminateSystems/flakehub-cache-action@main
+
+      - name: CI inside flake
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: bash
+        run: nix run github:lukewilliamboswell/roc-blueprint/0.5.0 -- run publish
+
+      # Optional artefacts (enable when you want them; free tier has storage caps)
+      # - name: Upload bundle-out
+      #   if: always()
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: ci-${{ github.run_id }}
+      #     path: bundle-out/
+      #     if-no-files-found: ignore
+      #     retention-days: 7
